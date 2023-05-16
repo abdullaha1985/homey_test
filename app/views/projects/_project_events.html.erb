@@ -1,0 +1,33 @@
+<div>
+  <h2><u>History</u></h2> <br>
+  <% @project.project_events.each do |event| %>
+
+    <% if event.is_a?(Comment) %>
+      <div class="bg-pink-100 rounded-md p-3 mb-8">
+        <h5><u>Comments</u></h5>
+        <h5><i>Author</i>: <%= event.user_name %></h5>
+        <h5><%= event.created_at.strftime("%d/%m/%Y %H:%M") %></h5>
+
+        <p><%= event.comment %></p>
+      </div>
+    <% else %>
+      <div class="bg-red-100 rounded-md p-3 mb-8">
+        <h5><u>Changes</u></h5>
+        <h5><i>Author</i>: <%= event.user_name %></h5>
+        <h5><%= event.created_at.strftime("%d/%m/%Y %H:%M") %></h5>
+
+        <% event.data_changes && event.data_changes.each do |key, values| %>
+          <p><span>Previous <%= key %>:</span> <b><%= values[0] %></b></p>
+          <p><span>Changed to <%= key %>:</span> <b><%= values[1] %></b></p>
+        <% end %>
+
+      </div>
+    <% end %>
+  <% end %>
+
+  <br>
+  <br>
+
+  <%= link_to 'Add New Comment', new_comment_path(project_id: @project.id),  class: 'btn bg-green-400' %>
+
+</div>

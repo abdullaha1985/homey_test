@@ -1,0 +1,35 @@
+<div class="bg-gray-50 p-8">
+  <%= form_with(model: project, local: true) do |form| %>
+    <% if project.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+        <ul>
+          <% project.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name, class: 'w-full rounded ' %>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="field">
+      <%= form.label :status %> <br>
+      <%= form.select :status, :collection => Project.statuses.keys.to_a %>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="actions">
+      <%= form.submit 'Save', class: 'btn bg-green-100' %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,14 @@
+<div>
+  <h2><u>History of State changes</u></h2>
+  <% @project.versions.each do |v| %>
+
+		<% if v.changeset['state'].present? %>
+		  <div style=" border: 1px; border-radius: 10px; background: lightyellow; margin-bottom: 20px; padding: 10px;">
+		    <h5><i>Changed at</i>: <%= v.changeset['updated_at'][1].to_time.strftime( "%H:%M  %d/%m/%Y") %></h5>
+
+		    <p><span>Previous state:</span> <b><%= v.changeset['state'][0] %></b></p>
+		    <p><span>Changed to state:</span> <b><%= v.changeset['state'][1] %></b></p>
+		  </div>
+		<% end %>
+	<% end %>
+</div>
